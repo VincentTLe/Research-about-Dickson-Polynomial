@@ -204,6 +204,6 @@ pip install pandas plotly numpy
 ## Citation
 
 If you use this research, please cite:
-- Repository: [Research-about-Dickson-Polynomial](https://github.com/LukeSaccius/Research-about-Dickson-Polynomial)
+- Repository: [Research-about-Dickson-Polynomial](https://github.com/VincentTle/Research-about-Dickson-Polynomial)
 - Primary proof: [docs/proofs/dickson-two-point-value-sets.md](docs/proofs/dickson-two-point-value-sets.md)
 
