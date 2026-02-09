@@ -26,6 +26,20 @@ A unified polynomial equation that is satisfied by all three indices is:
 
 For any prime `p > 3`, the three roots of this cubic equation in `n` are precisely the indices that yield a value set of cardinality 2.
 
+## Open Questions Under Investigation
+
+The following questions are currently being explored with computational scripts in `scripts/investigation/`:
+
+1. **Cardinality coverage (Q1):** For a given prime p > 3, does every cardinality from 1 to p-1 appear? **Finding:** No — only p = 5, 7, 11 have full coverage. Gaps grow as p increases.
+
+2. **Missing cardinality patterns (Q2):** Is there a pattern in which cardinalities are missing? **Finding:** Cardinality 5 is most frequently missing (16/20 primes). Missing values cluster at small values and near p-1.
+
+3. **Permutation polynomials (Q3):** D_n(x,1) is a permutation polynomial iff the value set has cardinality p. What patterns exist? **Finding:** The classical gcd(n, p^2-1)=1 criterion does NOT hold for the reversed form. Only 4-7 indices per prime give permutations, always including n=2 and n=3.
+
+4. **Formulas for other cardinalities (Q4):** Are there formulas for cardinalities 1, 3, 4, etc.? **Finding:** Cardinality 1 has exact formulas (n = 0, 1, p). Higher cardinalities have variable counts per prime depending on the factorization of p^2-1.
+
+5. **Parameter variation (Q5):** How does changing the parameter `a` (from 0 to p-1) affect results? **Finding:** For all nonzero `a`, there are exactly 3 cardinality-2 indices (same as a=1). The parameter `a=0` is degenerate with (p+1)/2 cardinality-2 indices. Quadratic residue status of `a` does not matter.
+
 ## Documentation
 
 ### Proofs
@@ -77,7 +91,21 @@ python scripts/visualization/plot_scatter.py
 ```
 This creates PNG plots in `output/plots/` for each prime.
 
-### 4. Additional Scripts
+### 4. Investigation Scripts (New Questions)
+
+These scripts investigate open questions beyond the cardinality-2 case:
+
+```bash
+python scripts/investigation/q1_cardinality_coverage.py       # Cardinality coverage analysis
+python scripts/investigation/q2_missing_cardinality_patterns.py # Missing cardinality patterns
+python scripts/investigation/q3_permutation_indices.py          # Permutation polynomial indices
+python scripts/investigation/q4_cardinality_formulas.py         # Formulas for cardinalities 1,3,4,...
+python scripts/investigation/q5_parameter_a_variation.py        # Varying parameter a from 0 to p-1
+```
+
+Results are saved to `output/results/`.
+
+### 5. Additional Scripts
 
 **Analysis:**
 - `scripts/analysis/analyze_cardinality_2.py` - Initial pattern discovery
@@ -106,6 +134,12 @@ This creates PNG plots in `output/plots/` for each prime.
 │   │   ├── analyze_remaining_patterns.py       # Non-twin prime analysis
 │   │   ├── derive_all_formulas.py              # Polynomial regression
 │   │   └── derive_formula.py                   # Formula derivation
+│   ├── investigation/                           # Open question investigation
+│   │   ├── q1_cardinality_coverage.py          # Q1: Does every cardinality appear?
+│   │   ├── q2_missing_cardinality_patterns.py  # Q2: Patterns in missing cardinalities
+│   │   ├── q3_permutation_indices.py           # Q3: Permutation polynomial analysis
+│   │   ├── q4_cardinality_formulas.py          # Q4: Formulas for cardinalities 1,3,4,...
+│   │   └── q5_parameter_a_variation.py         # Q5: Effect of varying parameter a
 │   ├── verification/
 │   │   ├── verify_all_formulas_exact.py        # Exact RMSE=0 verification
 │   │   ├── verify_cardinality_2_patterns.py    # Pattern verification
