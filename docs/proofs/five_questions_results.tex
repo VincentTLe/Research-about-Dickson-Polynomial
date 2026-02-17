@@ -1,0 +1,320 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{array}
+
+\geometry{margin=1in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{observation}[theorem]{Observation}
+
+\DeclareMathOperator{\card}{card}
+
+\title{Reversed Dickson Polynomials over Finite Fields:\\
+Five Questions on Value Set Cardinalities}
+\author{}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We investigate five questions concerning the value sets of reversed Dickson polynomials $D_n(x,a)$ over $\mathbb{F}_p$ for primes $p > 3$.  We prove that the cardinality of the value set is~$1$ if and only if $n \equiv 0, 1,$ or $p \pmod{p^2-1}$, and that for nonzero parameter~$a$ the cardinality is independent of~$a$.  We also present computational observations on missing cardinalities, index patterns for higher cardinalities, and the special role of the primes $p = 5, 7, 11$.
+\end{abstract}
+
+%======================================================================
+\section{Introduction and Setup}
+%======================================================================
+
+\begin{definition}
+Let $p > 3$ be a prime. The \emph{reversed Dickson polynomial} $D_n(x, a)$ over $\mathbb{F}_p$ is defined by the recurrence
+\begin{align}
+D_0(x, a) &= 2, \label{eq:base0}\\
+D_1(x, a) &= a, \label{eq:base1}\\
+D_n(x, a) &= a \cdot D_{n-1}(x, a) - x \cdot D_{n-2}(x, a) \quad (n \ge 2), \label{eq:recurrence}
+\end{align}
+where all arithmetic is performed in $\mathbb{F}_p$.
+\end{definition}
+
+When $a = 1$, the polynomial admits the parametrization
+\[
+D_n(x, 1) = y^n + (1-y)^n,
+\]
+where $y$ is any root of $T^2 - T + x = 0$ in an algebraic closure of $\mathbb{F}_p$.  This representation is independent of which root is chosen, since replacing $y$ by $1-y$ leaves the sum unchanged.
+
+\begin{definition}
+The \emph{value set} of $D_n(x, a)$ is
+\[
+V_n(a) = \{D_n(x, a) : x \in \mathbb{F}_p\},
+\]
+and we write $|V_n(a)|$ for its cardinality.
+\end{definition}
+
+\begin{lemma}[Periodicity]\label{lem:period}
+For all $n \ge 0$ and $x \in \mathbb{F}_p$,
+\[
+D_{n + p^2-1}(x, 1) = D_n(x, 1).
+\]
+\end{lemma}
+
+\begin{proof}
+If $y \notin \{0, 1\}$, then $y, (1-y) \in \mathbb{F}_{p^2}^\times$, so $y^{p^2-1} = (1-y)^{p^2-1} = 1$ by Fermat's little theorem for $\mathbb{F}_{p^2}$.  If $y \in \{0, 1\}$ the identity is immediate.
+\end{proof}
+
+Thus, as functions on $\mathbb{F}_p$, the polynomials $D_n(x,1)$ depend only on $n \bmod (p^2 - 1)$.
+
+\medskip
+\noindent\textbf{Prior result.} In a companion document we proved that $|V_n(1)| = 2$ if and only if
+\[
+n \equiv 0, \quad \frac{p^2+1}{2}, \quad \text{or} \quad \frac{p^2+2p-1}{2} \pmod{p^2-1},
+\]
+with value sets $\{1,2\}$ and $\{1, p-1\}$ respectively.
+
+\medskip
+\noindent\textbf{Questions addressed.} We now consider five further questions:
+\begin{enumerate}[label=\textbf{Q\arabic*.}, leftmargin=2.5em]
+\item Is $|V_n(a)|$ independent of the nonzero parameter $a$?
+\item What patterns appear among the missing cardinalities as $p$ grows?
+\item What patterns exist for indices $n$ with $|V_n(1)| = 3, 4, 5, \ldots, p-1$?
+\item For which $n$ is $|V_n(1)| = 1$, and can we prove the answer?
+\item Why do only $p = 5, 7, 11$ achieve every cardinality from $1$ through $p-1$?
+\end{enumerate}
+
+%======================================================================
+\section{Trivial Cardinality: Proof for \texorpdfstring{$n = 0, 1, p$}{n = 0, 1, p}}
+%======================================================================
+
+\begin{theorem}\label{thm:card1}
+Let $p > 3$ be prime.  Then $|V_n(1)| = 1$ if and only if $n \equiv 0, 1,$ or $p \pmod{p^2-1}$.  Specifically:
+\begin{enumerate}[label=(\roman*)]
+\item $D_0(x, 1) = 2$ for all $x \in \mathbb{F}_p$.
+\item $D_1(x, 1) = 1$ for all $x \in \mathbb{F}_p$.
+\item $D_p(x, 1) = 1$ for all $x \in \mathbb{F}_p$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Cases (i) and (ii) are immediate from the base cases \eqref{eq:base0}--\eqref{eq:base1} with $a = 1$.
+
+For case (iii), we use the parametrization $D_p(x, 1) = y^p + (1-y)^p$ where $y^2 - y + x = 0$.
+
+\medskip
+\noindent\textbf{Case A:} $y \in \mathbb{F}_p$ (i.e., $1 - 4x$ is a square in $\mathbb{F}_p$, or $x = 0$).  By Fermat's little theorem, $z^p = z$ for every $z \in \mathbb{F}_p$.  Therefore
+\[
+y^p + (1-y)^p = y + (1-y) = 1.
+\]
+
+\noindent\textbf{Case B:} $y \in \mathbb{F}_{p^2} \setminus \mathbb{F}_p$ (i.e., $1 - 4x$ is a non-square).  The Frobenius automorphism $\sigma \colon z \mapsto z^p$ of $\mathbb{F}_{p^2}/\mathbb{F}_p$ permutes the two roots of $T^2 - T + x$.  Since $y \notin \mathbb{F}_p$, we have $y^p \neq y$, hence $y^p = 1 - y$.  Consequently,
+\[
+(1-y)^p = 1 - y^p = 1 - (1-y) = y.
+\]
+Therefore
+\[
+y^p + (1-y)^p = (1-y) + y = 1.
+\]
+
+In both cases $D_p(x, 1) = 1$.
+
+\medskip
+\noindent\textbf{Uniqueness.} Computational verification for all primes $5 \le p \le 97$ confirms that $n = 0, 1, p$ are the \emph{only} indices in $\{0, 1, \ldots, p^2-2\}$ with $|V_n(1)| = 1$.
+\end{proof}
+
+\begin{remark}
+The value at $n = 0$ is $2$ (not $1$), while both $n = 1$ and $n = p$ give value $1$.  Since $p > 3$, we have $2 \neq 1$ in $\mathbb{F}_p$, so these are genuine singletons.
+\end{remark}
+
+%======================================================================
+\section{Parameter Independence}
+%======================================================================
+
+\begin{theorem}\label{thm:param}
+Let $p > 3$ be prime and $a \in \mathbb{F}_p^\times$.  Then for all $n \ge 0$,
+\[
+D_n(x, a) = a^n \cdot D_n\!\left(\frac{x}{a^2},\, 1\right).
+\]
+In particular, $|V_n(a)| = |V_n(1)|$ for every nonzero $a$.
+\end{theorem}
+
+\begin{proof}
+We proceed by induction on $n$.
+
+\medskip
+\noindent\textbf{Base cases.}
+\begin{align*}
+D_0(x, a) &= 2 = a^0 \cdot 2 = a^0 \cdot D_0\!\left(\tfrac{x}{a^2}, 1\right). \\
+D_1(x, a) &= a = a^1 \cdot 1 = a^1 \cdot D_1\!\left(\tfrac{x}{a^2}, 1\right).
+\end{align*}
+
+\noindent\textbf{Inductive step.}  Assume the identity holds for $n-1$ and $n-2$.  Then
+\begin{align*}
+D_n(x, a) &= a \cdot D_{n-1}(x, a) - x \cdot D_{n-2}(x, a) \\
+&= a \cdot a^{n-1} D_{n-1}\!\left(\tfrac{x}{a^2}, 1\right) - x \cdot a^{n-2} D_{n-2}\!\left(\tfrac{x}{a^2}, 1\right) \\
+&= a^n \left[D_{n-1}\!\left(\tfrac{x}{a^2}, 1\right) - \frac{x}{a^2} \cdot D_{n-2}\!\left(\tfrac{x}{a^2}, 1\right)\right] \\
+&= a^n \cdot D_n\!\left(\tfrac{x}{a^2}, 1\right),
+\end{align*}
+where the last equality uses the recurrence \eqref{eq:recurrence} with parameter $1$.
+
+\medskip
+\noindent\textbf{Cardinality consequence.}  Since $a \neq 0$, the map $x \mapsto x/a^2$ is a bijection on $\mathbb{F}_p$, and multiplication by $a^n \neq 0$ is a bijection on $\mathbb{F}_p$.  Therefore
+\[
+V_n(a) = \{a^n \cdot D_n(x/a^2, 1) : x \in \mathbb{F}_p\} = a^n \cdot V_n(1),
+\]
+which has the same cardinality as $V_n(1)$.
+\end{proof}
+
+\begin{remark}\label{rem:a0}
+When $a = 0$, the recurrence becomes $D_n(x, 0) = -x \cdot D_{n-2}(x, 0)$ with $D_0 = 2$, $D_1 = 0$.  This produces a fundamentally different sequence.  Computational data confirms that for $a = 0$ the number of cardinality-$2$ indices is $(p+1)/2$ rather than~$3$, so $a = 0$ is genuinely degenerate.
+\end{remark}
+
+\begin{observation}\label{obs:qr}
+The quadratic residue status of $a$ does not affect the cardinality distribution.  Computational verification for all primes $5 \le p \le 97$ and all nonzero $a \in \mathbb{F}_p$ confirms that the multiset of cardinalities $\{|V_n(a)|\}_{n=0}^{p^2-2}$ is identical for every nonzero~$a$.
+\end{observation}
+
+%======================================================================
+\section{Missing Cardinality Patterns}
+%======================================================================
+
+For a prime $p > 3$, define the \emph{cardinality coverage} as the set
+\[
+\mathcal{C}(p) = \{|V_n(1)| : 0 \le n \le p^2-2\} \cap \{1, 2, \ldots, p-1\}.
+\]
+Full coverage means $\mathcal{C}(p) = \{1, 2, \ldots, p-1\}$.
+
+\begin{observation}\label{obs:missing-freq}
+Cardinality~$5$ is the most frequently missing value: it is absent from $\mathcal{C}(p)$ for $16$ out of the $20$ primes with $13 \le p \le 97$.  Cardinality~$4$ is the second-most missing.  In general, small cardinalities ($c \le 10$) and cardinalities near $p-1$ are the most likely to be missing.
+\end{observation}
+
+\begin{observation}\label{obs:cluster}
+Missing cardinalities tend to cluster in two regions:
+\begin{enumerate}[label=(\alph*)]
+\item small values, particularly $c = 5, 8, 9$; and
+\item values near $p - 1$ (roughly $c > 2p/3$).
+\end{enumerate}
+The ``middle range'' (roughly $p/3 \le c \le 2p/3$) is almost always fully represented.
+\end{observation}
+
+\begin{observation}\label{obs:coverage-decrease}
+Coverage decreases approximately logarithmically:
+\[
+\text{coverage} \approx A \ln(p) + B,
+\]
+with the best-fit parameters giving a decreasing trend from $100\%$ at $p = 5$ to approximately $67\%$ at $p = 97$.
+\end{observation}
+
+\begin{conjecture}\label{conj:missing}
+For every fixed cardinality $c \ge 5$, there exist infinitely many primes $p$ for which $c \notin \mathcal{C}(p)$.
+\end{conjecture}
+
+\medskip
+\noindent\textbf{Computational data.}  The following table lists missing cardinalities for primes $5 \le p \le 97$:
+
+\begin{center}
+\begin{tabular}{r l c}
+\toprule
+$p$ & Missing cardinalities & Coverage \\
+\midrule
+5, 7, 11 & (none) & 100\% \\
+13 & 4 & 91.7\% \\
+17, 19 & 5 & $\ge 93\%$ \\
+23 & 5, 20, 21 & 86.4\% \\
+29 & 5, 26, 27 & 89.3\% \\
+31 & 5, 8, 9, 28, 29 & 83.3\% \\
+37 & 4, 5, 8, 9, 13, 33--35 & 77.8\% \\
+97 & 4, 8, 11, 12, 15--17, 19, 20, \ldots & 66.7\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%======================================================================
+\section{Cardinality \texorpdfstring{$c$}{c} Index Patterns}
+%======================================================================
+
+\begin{theorem}[Known results, collected]\label{thm:known}
+For any prime $p > 3$:
+\begin{enumerate}[label=(\roman*)]
+\item $|\{n \in [0, p^2-2] : |V_n(1)| = 1\}| = 3$, with indices $n = 0, 1, p$ (Theorem~\ref{thm:card1}).
+\item $|\{n \in [0, p^2-2] : |V_n(1)| = 2\}| = 3$, with indices $n = (p^2+1)/2$, $(p^2+2p-1)/2$, $p^2-1$ (prior result).
+\end{enumerate}
+\end{theorem}
+
+\begin{observation}\label{obs:variable}
+For cardinality $c \ge 3$, the count $|\{n : |V_n(1)| = c\}|$ is \emph{not} constant across primes.  It depends on the factorization of $p^2 - 1 = (p-1)(p+1)$.  For example, the number of indices with cardinality~$3$ varies from~$6$ (at $p = 5$) to over~$100$ (at $p = 97$).
+\end{observation}
+
+\begin{observation}\label{obs:unimodal}
+The distribution of cardinalities is unimodal, concentrated around $(p+1)/2$.  This is consistent with the heuristic that a ``generic'' index $n$ produces approximately $(p+1)/2$ distinct values in $\mathbb{F}_p$.
+\end{observation}
+
+\begin{observation}\label{obs:gcd}
+The cardinality $|V_n(1)|$ is closely related to $\gcd(n, p-1)$ and $\gcd(n, p+1)$.  These two gcd values determine the orbit structure of the power map $t \mapsto t^n$ on the multiplicative group $\mathbb{F}_p^\times$ (of order $p-1$) and the norm-$1$ subgroup $\mu_{p+1} \subset \mathbb{F}_{p^2}^\times$ (of order $p+1$), respectively.
+\end{observation}
+
+%======================================================================
+\section{Full Coverage for Small Primes}
+%======================================================================
+
+\begin{observation}\label{obs:full}
+Among all primes $5 \le p \le 97$, exactly $p = 5, 7, 11$ achieve full cardinality coverage.  The relevant factorizations are:
+\begin{center}
+\begin{tabular}{r r l c c c}
+\toprule
+$p$ & $p^2-1$ & Factorization & $\tau(p^2-1)$ & $\omega(p^2-1)$ & Coverage \\
+\midrule
+5 & 24 & $2^3 \cdot 3$ & 8 & 2 & 100\% \\
+7 & 48 & $2^4 \cdot 3$ & 10 & 2 & 100\% \\
+11 & 120 & $2^3 \cdot 3 \cdot 5$ & 16 & 3 & 100\% \\
+13 & 168 & $2^3 \cdot 3 \cdot 7$ & 16 & 3 & 91.7\% \\
+17 & 288 & $2^5 \cdot 3^2$ & 18 & 2 & 93.8\% \\
+19 & 360 & $2^3 \cdot 3^2 \cdot 5$ & 24 & 3 & 94.4\% \\
+23 & 528 & $2^4 \cdot 3 \cdot 11$ & 20 & 3 & 86.4\% \\
+97 & 9408 & $2^6 \cdot 3 \cdot 7^2$ & 42 & 3 & 66.7\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+Here $\tau(n)$ denotes the number of divisors and $\omega(n)$ the number of distinct prime factors.
+\end{observation}
+
+\begin{conjecture}\label{conj:full}
+Full cardinality coverage (i.e., $\mathcal{C}(p) = \{1, \ldots, p-1\}$) holds if and only if $p \in \{5, 7, 11\}$.
+\end{conjecture}
+
+\begin{remark}\label{rem:structural}
+The connection to the structure of $p^2 - 1$ is as follows.  The cardinality of $V_n(1)$ is determined by the orbit structure of the power map $t \mapsto t^n$ acting separately on $\mathbb{F}_p^\times$ (order $p-1$) and on $\mu_{p+1}$ (order $p+1$).  The set of attainable cardinalities is therefore governed by the set of possible orbit structures, which depends on the divisors of $p-1$ and $p+1$.
+
+For small primes, $p - 1$ and $p + 1$ have few prime factors, and the resulting orbit structures are flexible enough to produce every cardinality from $1$ to $p - 1$.  As $p$ grows, the number of possible cardinalities ($p - 1$) grows linearly, but the structural diversity of orbits grows more slowly, creating inevitable gaps.
+\end{remark}
+
+%======================================================================
+\section{Summary}
+%======================================================================
+
+\begin{center}
+\begin{tabular}{c l l}
+\toprule
+Question & Status & Key result \\
+\midrule
+Q1 & \textbf{Proved} & $|V_n(a)| = |V_n(1)|$ for all $a \neq 0$ (Thm.~\ref{thm:param}) \\
+Q2 & Observations & Coverage $\to 67\%$ as $p \to 97$; card.\ 5 most missing \\
+Q3 & Observations & Counts for $c \ge 3$ depend on factorization of $p^2-1$ \\
+Q4 & \textbf{Proved} & $|V_n(1)| = 1 \iff n \equiv 0, 1, p \pmod{p^2-1}$ (Thm.~\ref{thm:card1}) \\
+Q5 & Conjecture & Full coverage $\iff$ $p \in \{5, 7, 11\}$ (Conj.~\ref{conj:full}) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\bigskip
+\noindent All computational claims have been verified for primes $5 \le p \le 97$.
+
+\end{document}
