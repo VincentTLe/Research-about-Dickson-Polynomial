@@ -17,6 +17,13 @@ and all n in {0,..,p^2-2}.
 import math
 import os
 import sys
+from pathlib import Path
+
+SCRIPT_ROOT = Path(__file__).resolve().parents[1]
+if str(SCRIPT_ROOT) not in sys.path:
+    sys.path.append(str(SCRIPT_ROOT))
+
+from utilities.dickson import reversed_dickson
 
 
 def is_prime(num):
@@ -50,7 +57,8 @@ def compute_value_sets(p, a):
     for n in range(2, p * p):
         Dnext = []
         for x in range(p):
-            Dnext_val = (a * Dcurr[x] - x * Dprev[x]) % p
+            # Explicitly using reversed variant D_n(a, x).
+            Dnext_val = reversed_dickson(n=n, a=a, x=x, modulus=p)
             Dnext.append(Dnext_val)
         vals = sorted(set(Dnext))
         results.append((n, len(vals), len(vals) == p, vals))

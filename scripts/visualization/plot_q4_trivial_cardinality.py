@@ -1,7 +1,7 @@
 """
 Q4: Prove that when n = 0, 1, or p, the cardinality of the value set is 1.
 
-This script verifies computationally that D_n(x, 1) is constant for n in {0, 1, p},
+This script verifies computationally that D_n(1, x) is constant for n in {0, 1, p},
 identifies the constant output values, and confirms these are the ONLY indices
 with cardinality 1. Generates a verification table and bar chart.
 """
@@ -11,21 +11,19 @@ import pandas as pd
 import numpy as np
 import math
 import os
+from pathlib import Path
+import sys
+
+SCRIPT_ROOT = Path(__file__).resolve().parents[1]
+if str(SCRIPT_ROOT) not in sys.path:
+    sys.path.append(str(SCRIPT_ROOT))
+
+from utilities.dickson import reversed_dickson_d1
 
 
 def reversed_dickson_polynomial(n, x, p):
-    """Compute D_n(1, x) mod p using the recurrence relation."""
-    if n == 0:
-        return 2 % p
-    if n == 1:
-        return 1 % p
-    d_prev = 2 % p
-    d_curr = 1 % p
-    for i in range(2, n + 1):
-        d_next = (d_curr - x * d_prev) % p
-        d_prev = d_curr
-        d_curr = d_next
-    return d_curr
+    """Compute D_n(1, x) mod p (reversed variant)."""
+    return reversed_dickson_d1(n=n, x=x, modulus=p)
 
 
 def is_prime(num):
@@ -66,7 +64,7 @@ def main():
         table_data.append(row)
 
     # Print results
-    print(f"{'p':>5} | {'D_0(x,1)':>10} | {'D_1(x,1)':>10} | {'D_p(x,1)':>10} | All card=1?")
+    print(f"{'p':>5} | {'D_0(1,x)':>10} | {'D_1(1,x)':>10} | {'D_p(1,x)':>10} | All card=1?")
     print("-" * 65)
     all_ok = True
     for row in table_data:
@@ -100,7 +98,7 @@ def main():
     ax.set_title('Q4: Trivial Cardinality Verification\n'
                  r'$|V_n(1)| = 1$ for $n \in \{0, 1, p\}$', fontsize=14, fontweight='bold')
 
-    col_labels = ['Prime $p$', '$D_0(x,1)$', '$D_1(x,1)$', '$D_p(x,1)$', 'Card-1 indices']
+    col_labels = ['Prime $p$', '$D_0(1,x)$', '$D_1(1,x)$', '$D_p(1,x)$', 'Card-1 indices']
     cell_text = []
     for row in table_data:
         p = row['p']
@@ -143,9 +141,9 @@ def main():
     d1_vals = [row['n=1_value'] for row in table_data]
     dp_vals = [row['n=p_value'] for row in table_data]
 
-    bars1 = ax.bar(x_pos - width, d0_vals, width, label='$D_0(x,1) = 2$', color='#4472C4', alpha=0.8)
-    bars2 = ax.bar(x_pos, d1_vals, width, label='$D_1(x,1) = 1$', color='#ED7D31', alpha=0.8)
-    bars3 = ax.bar(x_pos + width, dp_vals, width, label='$D_p(x,1) = 1$', color='#70AD47', alpha=0.8)
+    bars1 = ax.bar(x_pos - width, d0_vals, width, label='$D_0(1,x) = 2$', color='#4472C4', alpha=0.8)
+    bars2 = ax.bar(x_pos, d1_vals, width, label='$D_1(1,x) = 1$', color='#ED7D31', alpha=0.8)
+    bars3 = ax.bar(x_pos + width, dp_vals, width, label='$D_p(1,x) = 1$', color='#70AD47', alpha=0.8)
 
     ax.set_xlabel('Prime $p$', fontsize=12)
     ax.set_ylabel('Constant Output Value', fontsize=12)
@@ -169,15 +167,15 @@ def main():
         f.write("Q4: Trivial Cardinality Verification\n")
         f.write("=" * 50 + "\n\n")
         f.write("For all primes 5 <= p <= 97:\n\n")
-        f.write("  D_0(x, 1) = 2  for all x in F_p  (cardinality 1)\n")
-        f.write("  D_1(x, 1) = 1  for all x in F_p  (cardinality 1)\n")
-        f.write("  D_p(x, 1) = 1  for all x in F_p  (cardinality 1)\n\n")
+        f.write("  D_0(1, x) = 2  for all x in F_p  (cardinality 1)\n")
+        f.write("  D_1(1, x) = 1  for all x in F_p  (cardinality 1)\n")
+        f.write("  D_p(1, x) = 1  for all x in F_p  (cardinality 1)\n\n")
         f.write("These are the ONLY n in [0, p^2-1) with cardinality 1.\n")
         f.write(f"Verified across all {len(primes)} primes: {all_ok and csv_ok}\n\n")
         f.write("Mathematical explanation:\n")
         f.write("  n=0: D_0 = 2 by definition (base case)\n")
         f.write("  n=1: D_1 = 1 by definition (a=1 base case)\n")
-        f.write("  n=p: D_p(x,1) = y^p + (1-y)^p = y + (1-y) = 1\n")
+        f.write("  n=p: D_p(1,x) = y^p + (1-y)^p = y + (1-y) = 1\n")
         f.write("        by Frobenius endomorphism (z^p = z for z in F_p,\n")
         f.write("        and y^p = 1-y for y in F_{p^2} \\ F_p)\n")
     print(f"Verification saved to output/results/q4_verification.txt")

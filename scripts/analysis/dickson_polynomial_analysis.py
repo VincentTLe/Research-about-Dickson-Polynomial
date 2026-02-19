@@ -1,13 +1,12 @@
-"""
-Derive explicit Dickson polynomial formulas D_n(1, x) for cardinality-2 indices.
+"""Derive explicit formulas for the canonical variant D_n(1, x).
 
-The reversed Dickson polynomial D_n(a, x) is defined by the recurrence:
+Canonical definition in this repository (reversed form, exact recurrence):
     D_0(a, x) = 2
-    D_1(a, x) = x
-    D_n(a, x) = x * D_{n-1}(a, x) - a * D_{n-2}(a, x)
+    D_1(a, x) = a
+    D_n(a, x) = a * D_{n-1}(a, x) - x * D_{n-2}(a, x)
 
-For a = 1 (our case):
-    D_n(1, x) = x * D_{n-1}(1, x) - D_{n-2}(1, x)
+For a = 1 (our main case):
+    D_n(1, x) = D_{n-1}(1, x) - x * D_{n-2}(1, x)
 
 We substitute the three cardinality-2 index formulas:
     n1 = (p^2 + 1) / 2
@@ -15,27 +14,22 @@ We substitute the three cardinality-2 index formulas:
     n3 = (p^2 + 2p - 1) / 2
 """
 
+from pathlib import Path
+import sys
+
+SCRIPT_ROOT = Path(__file__).resolve().parents[1]
+if str(SCRIPT_ROOT) not in sys.path:
+    sys.path.append(str(SCRIPT_ROOT))
+
+from utilities.dickson import reversed_dickson, reversed_value_set
+
 
 def dickson_polynomial_modp(n, x, p, a=1):
     """
     Compute D_n(a, x) mod p using the recurrence relation.
     Returns an integer result mod p.
     """
-    if n == 0:
-        return 2 % p
-    elif n == 1:
-        return x % p
-    
-    # Use recurrence relation
-    D_prev2 = 2  # D_0
-    D_prev1 = x  # D_1
-    
-    for i in range(2, n + 1):
-        D_curr = (x * D_prev1 - a * D_prev2) % p
-        D_prev2 = D_prev1
-        D_prev1 = D_curr
-    
-    return D_prev1
+    return reversed_dickson(n=n, a=a, x=x, modulus=p)
 
 
 def compute_dickson_valueset(n, p, a=1):
@@ -43,11 +37,7 @@ def compute_dickson_valueset(n, p, a=1):
     Compute the value set of D_n(a, x) over F_p.
     Returns a set of distinct values.
     """
-    values = set()
-    for x in range(p):
-        val = dickson_polynomial_modp(n, x, p, a)
-        values.add(val)
-    return values
+    return reversed_value_set(n=n, p=p, a=a)
 
 
 def analyze_dickson_for_cardinality_2_indices():
