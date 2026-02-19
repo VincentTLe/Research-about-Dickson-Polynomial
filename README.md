@@ -1,8 +1,22 @@
 # Research on Dickson Polynomial Value Sets
 
-This project contains scripts, data, and research notes for analyzing the value sets of reversed Dickson polynomials, `D_n(x, 1)`, over finite fields `F_p`.
+This project contains scripts, data, and research notes for analyzing the value sets of reversed Dickson polynomials, `D_n(1, x)`, over finite fields `F_p`.
 
 ## Objective
+
+## Notation convention
+
+This repository uses the **reversed Dickson polynomial** as the canonical object:
+
+- General form: `D_n(a, x)`
+- Main research case: `D_n(1, x)`
+- Exact recurrence used throughout scripts and proofs:
+  - `D_0(a, x) = 2`
+  - `D_1(a, x) = a`
+  - `D_n(a, x) = a D_{n-1}(a, x) - x D_{n-2}(a, x)` for `n >= 2`
+
+When the classical non-reversed variant is discussed, it is named explicitly in code or prose to avoid ambiguity.
+
 
 The primary goal is to analyze the cardinality (the number of unique values) of these value sets for various primes `p` and indices `n`, and to identify number-theoretic patterns.
 
@@ -34,7 +48,7 @@ The following questions are currently being explored with computational scripts 
 
 2. **Missing cardinality patterns (Q2):** Is there a pattern in which cardinalities are missing? **Finding:** Cardinality 5 is most frequently missing (16/20 primes). Missing values cluster at small values and near p-1.
 
-3. **Permutation polynomials (Q3):** D_n(x,1) is a permutation polynomial iff the value set has cardinality p. What patterns exist? **Finding:** The classical gcd(n, p^2-1)=1 criterion does NOT hold for the reversed form. Only 4-7 indices per prime give permutations, always including n=2 and n=3.
+3. **Permutation polynomials (Q3):** D_n(1,x) is a permutation polynomial iff the value set has cardinality p. What patterns exist? **Finding:** The classical gcd(n, p^2-1)=1 criterion does NOT hold for the reversed form. Only 4-7 indices per prime give permutations, always including n=2 and n=3.
 
 4. **Formulas for other cardinalities (Q4):** Are there formulas for cardinalities 1, 3, 4, etc.? **Finding:** Cardinality 1 has exact formulas (n = 0, 1, p). Higher cardinalities have variable counts per prime depending on the factorization of p^2-1.
 

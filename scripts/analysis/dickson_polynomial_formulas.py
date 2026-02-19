@@ -3,11 +3,11 @@ Derive explicit Dickson polynomial formulas D_n(1, x) for cardinality-2 indices.
 
 The reversed Dickson polynomial D_n(a, x) is defined by the recurrence:
     D_0(a, x) = 2
-    D_1(a, x) = x
-    D_n(a, x) = x * D_{n-1}(a, x) - a * D_{n-2}(a, x)
+    D_1(a, x) = a
+    D_n(a, x) = a * D_{n-1}(a, x) - x * D_{n-2}(a, x)
 
 For a = 1 (our case):
-    D_n(1, x) = x * D_{n-1}(1, x) - D_{n-2}(1, x)
+    D_n(1, x) = D_{n-1}(1, x) - x * D_{n-2}(1, x)
 
 We substitute the three cardinality-2 index formulas:
     n1 = (p^2 + 1) / 2
@@ -17,27 +17,31 @@ We substitute the three cardinality-2 index formulas:
 
 import sympy as sp
 from sympy import symbols, simplify, expand, factor, Poly
+from pathlib import Path
+import sys
+
+SCRIPT_ROOT = Path(__file__).resolve().parents[1]
+if str(SCRIPT_ROOT) not in sys.path:
+    sys.path.append(str(SCRIPT_ROOT))
+
+from utilities.dickson import reversed_dickson
 
 
 def dickson_polynomial_recurrence(n, x, a=1):
-    """
-    Compute D_n(a, x) using the recurrence relation.
-    Returns a sympy expression.
-    """
+    """Compute symbolic D_n(a, x) using the reversed recurrence."""
     if n == 0:
         return 2
-    elif n == 1:
-        return x
-    
-    # Use recurrence relation
+    if n == 1:
+        return a
+
     D_prev2 = 2  # D_0
-    D_prev1 = x  # D_1
-    
+    D_prev1 = a  # D_1
+
     for i in range(2, n + 1):
-        D_curr = x * D_prev1 - a * D_prev2
+        D_curr = a * D_prev1 - x * D_prev2
         D_prev2 = D_prev1
         D_prev1 = D_curr
-    
+
     return D_prev1
 
 

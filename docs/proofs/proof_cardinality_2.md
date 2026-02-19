@@ -1,4 +1,9 @@
 # Proof for Dickson Polynomial Value Sets with Cardinality 2
+## Notation convention
+
+We use reversed Dickson notation throughout: `D_n(a, x)`, with canonical focus on `D_n(1, x)`.
+The exact recurrence is `D_0(a, x)=2`, `D_1(a, x)=a`, `D_n(a, x)=aD_{n-1}(a, x)-xD_{n-2}(a, x)` for `n\ge2`.
+
 
 ## Overview
 
@@ -31,7 +36,7 @@ x = y(1-y) for some y in F_p
 Using this parametrization, the Dickson polynomial can be represented as:
 
 ```
-D_n(x, 1) = y^n + (1-y)^n
+D_n(1, x) = y^n + (1-y)^n
 ```
 
 As `x` ranges over all elements of `F_p`, the polynomial takes on various values. The **"value set"** is the collection of all distinct outputs.

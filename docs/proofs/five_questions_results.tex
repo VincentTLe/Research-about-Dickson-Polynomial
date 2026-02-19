@@ -31,33 +31,35 @@ Five Questions on Value Set Cardinalities}
 \maketitle
 
 \begin{abstract}
-We investigate five questions concerning the value sets of reversed Dickson polynomials $D_n(x,a)$ over $\mathbb{F}_p$ for primes $p > 3$.  We prove that the cardinality of the value set is~$1$ if and only if $n \equiv 0, 1,$ or $p \pmod{p^2-1}$, and that for nonzero parameter~$a$ the cardinality is independent of~$a$.  We also present computational observations on missing cardinalities, index patterns for higher cardinalities, and the special role of the primes $p = 5, 7, 11$.
+We investigate five questions concerning the value sets of reversed Dickson polynomials $D_n(a,x)$ over $\mathbb{F}_p$ for primes $p > 3$.  We prove that the cardinality of the value set is~$1$ if and only if $n \equiv 0, 1,$ or $p \pmod{p^2-1}$, and that for nonzero parameter~$a$ the cardinality is independent of~$a$.  We also present computational observations on missing cardinalities, index patterns for higher cardinalities, and the special role of the primes $p = 5, 7, 11$.
 \end{abstract}
 
 %======================================================================
 \section{Introduction and Setup}
 %======================================================================
 
+\noindent\textbf{Notation convention.} Throughout we use reversed Dickson notation $D_n(a,x)$, with canonical case $D_n(1,x)$, defined exactly by $D_0(a,x)=2$, $D_1(a,x)=a$, and $D_n(a,x)=aD_{n-1}(a,x)-xD_{n-2}(a,x)$ for $n\ge2$.
+
 \begin{definition}
-Let $p > 3$ be a prime. The \emph{reversed Dickson polynomial} $D_n(x, a)$ over $\mathbb{F}_p$ is defined by the recurrence
+Let $p > 3$ be a prime. The \emph{reversed Dickson polynomial} $D_n(a, x)$ over $\mathbb{F}_p$ is defined by the recurrence
 \begin{align}
-D_0(x, a) &= 2, \label{eq:base0}\\
-D_1(x, a) &= a, \label{eq:base1}\\
-D_n(x, a) &= a \cdot D_{n-1}(x, a) - x \cdot D_{n-2}(x, a) \quad (n \ge 2), \label{eq:recurrence}
+D_0(a, x) &= 2, \label{eq:base0}\\
+D_1(a, x) &= a, \label{eq:base1}\\
+D_n(a, x) &= a \cdot D_{n-1}(a, x) - x \cdot D_{n-2}(a, x) \quad (n \ge 2), \label{eq:recurrence}
 \end{align}
 where all arithmetic is performed in $\mathbb{F}_p$.
 \end{definition}
 
 When $a = 1$, the polynomial admits the parametrization
 \[
-D_n(x, 1) = y^n + (1-y)^n,
+D_n(1, x) = y^n + (1-y)^n,
 \]
 where $y$ is any root of $T^2 - T + x = 0$ in an algebraic closure of $\mathbb{F}_p$.  This representation is independent of which root is chosen, since replacing $y$ by $1-y$ leaves the sum unchanged.
 
 \begin{definition}
-The \emph{value set} of $D_n(x, a)$ is
+The \emph{value set} of $D_n(a, x)$ is
 \[
-V_n(a) = \{D_n(x, a) : x \in \mathbb{F}_p\},
+V_n(a) = \{D_n(a, x) : x \in \mathbb{F}_p\},
 \]
 and we write $|V_n(a)|$ for its cardinality.
 \end{definition}
@@ -65,7 +67,7 @@ and we write $|V_n(a)|$ for its cardinality.
 \begin{lemma}[Periodicity]\label{lem:period}
 For all $n \ge 0$ and $x \in \mathbb{F}_p$,
 \[
-D_{n + p^2-1}(x, 1) = D_n(x, 1).
+D_{n + p^2-1}(1, x) = D_n(1, x).
 \]
 \end{lemma}
 
@@ -73,7 +75,7 @@ D_{n + p^2-1}(x, 1) = D_n(x, 1).
 If $y \notin \{0, 1\}$, then $y, (1-y) \in \mathbb{F}_{p^2}^\times$, so $y^{p^2-1} = (1-y)^{p^2-1} = 1$ by Fermat's little theorem for $\mathbb{F}_{p^2}$.  If $y \in \{0, 1\}$ the identity is immediate.
 \end{proof}
 
-Thus, as functions on $\mathbb{F}_p$, the polynomials $D_n(x,1)$ depend only on $n \bmod (p^2 - 1)$.
+Thus, as functions on $\mathbb{F}_p$, the polynomials $D_n(1,x)$ depend only on $n \bmod (p^2 - 1)$.
 
 \medskip
 \noindent\textbf{Prior result.} In a companion document we proved that $|V_n(1)| = 2$ if and only if
@@ -142,7 +144,7 @@ The value at $n = 0$ is $2$ (not $1$), while both $n = 1$ and $n = p$ give value
 \begin{theorem}\label{thm:param}
 Let $p > 3$ be prime and $a \in \mathbb{F}_p^\times$.  Then for all $n \ge 0$,
 \[
-D_n(x, a) = a^n \cdot D_n\!\left(\frac{x}{a^2},\, 1\right).
+D_n(a, x) = a^n \cdot D_n\!\left(\frac{x}{a^2},\, 1\right).
 \]
 In particular, $|V_n(a)| = |V_n(1)|$ for every nonzero $a$.
 \end{theorem}
@@ -153,13 +155,13 @@ We proceed by induction on $n$.
 \medskip
 \noindent\textbf{Base cases.}
 \begin{align*}
-D_0(x, a) &= 2 = a^0 \cdot 2 = a^0 \cdot D_0\!\left(\tfrac{x}{a^2}, 1\right). \\
-D_1(x, a) &= a = a^1 \cdot 1 = a^1 \cdot D_1\!\left(\tfrac{x}{a^2}, 1\right).
+D_0(a, x) &= 2 = a^0 \cdot 2 = a^0 \cdot D_0\!\left(\tfrac{x}{a^2}, 1\right). \\
+D_1(a, x) &= a = a^1 \cdot 1 = a^1 \cdot D_1\!\left(\tfrac{x}{a^2}, 1\right).
 \end{align*}
 
 \noindent\textbf{Inductive step.}  Assume the identity holds for $n-1$ and $n-2$.  Then
 \begin{align*}
-D_n(x, a) &= a \cdot D_{n-1}(x, a) - x \cdot D_{n-2}(x, a) \\
+D_n(a, x) &= a \cdot D_{n-1}(a, x) - x \cdot D_{n-2}(a, x) \\
 &= a \cdot a^{n-1} D_{n-1}\!\left(\tfrac{x}{a^2}, 1\right) - x \cdot a^{n-2} D_{n-2}\!\left(\tfrac{x}{a^2}, 1\right) \\
 &= a^n \left[D_{n-1}\!\left(\tfrac{x}{a^2}, 1\right) - \frac{x}{a^2} \cdot D_{n-2}\!\left(\tfrac{x}{a^2}, 1\right)\right] \\
 &= a^n \cdot D_n\!\left(\tfrac{x}{a^2}, 1\right),

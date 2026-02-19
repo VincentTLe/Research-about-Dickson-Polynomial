@@ -2,8 +2,8 @@
 Q3: The polynomial is a permutation polynomial if and only if the
 cardinality of the value set equals p. Anything interesting in this case?
 
-Analyzes which indices n make D_n(x,1) a permutation polynomial over F_p.
-Tests the known criterion: D_n(x,a) is a permutation poly iff gcd(n, p^2-1) = 1.
+Analyzes which indices n make D_n(1,x) a permutation polynomial over F_p.
+Tests the known criterion: D_n(a,x) is a permutation poly iff gcd(n, p^2-1) = 1.
 """
 
 import pandas as pd
@@ -17,7 +17,7 @@ def main():
 
     print("=" * 70)
     print("Q3: Permutation Polynomial Index Analysis")
-    print("    D_n(x,1) is a permutation poly iff value set has cardinality p")
+    print("    D_n(1,x) is a permutation poly iff value set has cardinality p")
     print("=" * 70)
     print()
 

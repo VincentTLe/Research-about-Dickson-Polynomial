@@ -1,18 +1,23 @@
 # Proof of Cardinality 2 for Reversed Dickson Polynomials Over Finite Fields
+## Notation convention
 
-This document provides full proofs and derivations for the cases where the reversed Dickson polynomial $D_n(x, 1)$, evaluated over a finite field $\mathbb{F}_p$, produces value sets of cardinality exactly 2. We summarize, prove, and explain the patterns discovered in the research for all relevant indices $n$.
+We use reversed Dickson notation throughout: `D_n(a, x)`, with canonical focus on `D_n(1, x)`.
+The exact recurrence is `D_0(a, x)=2`, `D_1(a, x)=a`, `D_n(a, x)=aD_{n-1}(a, x)-xD_{n-2}(a, x)` for `n\ge2`.
+
+
+This document provides full proofs and derivations for the cases where the reversed Dickson polynomial $D_n(1, x)$, evaluated over a finite field $\mathbb{F}_p$, produces value sets of cardinality exactly 2. We summarize, prove, and explain the patterns discovered in the research for all relevant indices $n$.
 
 ## General Setup
 
 Let $p > 3$ be an odd prime. The reversed Dickson polynomial over $\mathbb{F}_p$ is:
 
 $$
-D_n(x, 1) = y^n + (1-y)^n,
+D_n(1, x) = y^n + (1-y)^n,
 $$
 
 where $x = y(1-y)$ for $y \in \mathbb{F}_p$.
 
-The value set of $D_n(x, 1)$ is the set of all distinct outputs as $x$ varies over $\mathbb{F}_p$.
+The value set of $D_n(1, x)$ is the set of all distinct outputs as $x$ varies over $\mathbb{F}_p$.
 
 ---
 
@@ -48,7 +53,7 @@ So:
 
 ## Proof for Case 2: $n_2 = \frac{p^2+1}{2}$ and Case 3: $n_3 = \frac{p^2+2p-1}{2}$
 
-**Statement:** For both indices, $D_n(x,1)$ over $x \in \mathbb{F}_p$ produces only the values 1 and $p-1$ (i.e., 1 and -1 in $\mathbb{F}_p$).
+**Statement:** For both indices, $D_n(1,x)$ over $x \in \mathbb{F}_p$ produces only the values 1 and $p-1$ (i.e., 1 and -1 in $\mathbb{F}_p$).
 
 **Proof for Both Cases:**
 
@@ -60,7 +65,7 @@ So:
 **Step 2: Analyze the Polynomial**
 
 $$
-D_n(x,1) = y^n + (1-y)^n = \epsilon_1 y + \epsilon_2 (1-y),
+D_n(1,x) = y^n + (1-y)^n = \epsilon_1 y + \epsilon_2 (1-y),
 $$
 
 where $\epsilon_1, \epsilon_2 \in \{\pm 1\}$ are determined by the quadratic character.
@@ -80,7 +85,7 @@ where $\epsilon_1, \epsilon_2 \in \{\pm 1\}$ are determined by the quadratic cha
 
 ## Summary Table
 
-| Index $n$ | Value Set of $D_n(x, 1)$ |
+| Index $n$ | Value Set of $D_n(1, x)$ |
 |-----------|---------------------------|
 | $p^2-1$ | $\{1, 2\}$ |
 | $\frac{p^2+1}{2}$ | $\{1, p-1\}$ |

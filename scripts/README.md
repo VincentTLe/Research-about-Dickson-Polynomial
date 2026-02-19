@@ -8,7 +8,7 @@ This directory contains all Python scripts for the Dickson polynomial value set 
 **Purpose:** Generate raw data for reversed Dickson polynomial value sets
 
 - **Test.py** - Main data generation script
-  - Computes D_n(x,1) for all x ∈ F_p using reversed recurrence relation
+  - Computes D_n(1, x) for all x ∈ F_p using reversed recurrence relation
   - Generates data for primes 3 to 97
   - Outputs:
     - `data/reversed_dickson_values.csv` - Raw data (p, n, cardinality, values)
@@ -46,7 +46,7 @@ This directory contains all Python scripts for the Dickson polynomial value set 
   - Verifies formulas across all primes in dataset
   
 - **verify_value_sets.py** - Theoretical value set verification
-  - Computes actual D_n(x,1) values using reversed recurrence
+  - Computes actual D_n(1, x) values using reversed recurrence
   - Confirms Formula 1 and 3 → {1, p-1}
   - Confirms Formula 2 → {1, 2}
   - Validates mathematical proof predictions

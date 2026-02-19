@@ -1,6 +1,11 @@
 # Reversed Dickson Polynomials: Indices with Two-Point Value Sets over $\mathbb{F}_p$ (p > 3)
+## Notation convention
 
-**Abstract.** For a prime $p>3$, the reversed Dickson polynomial $D_n(x,1)$ over $\mathbb{F}_p$ has image (value set) of cardinality two **iff**
+We use reversed Dickson notation throughout: `D_n(a, x)`, with canonical focus on `D_n(1, x)`.
+The exact recurrence is `D_0(a, x)=2`, `D_1(a, x)=a`, `D_n(a, x)=aD_{n-1}(a, x)-xD_{n-2}(a, x)` for `n\ge2`.
+
+
+**Abstract.** For a prime $p>3$, the reversed Dickson polynomial $D_n(1,x)$ over $\mathbb{F}_p$ has image (value set) of cardinality two **iff**
 
 $$
 n \equiv 0,\ \frac{p^2+1}{2},\ \frac{p^2+2p-1}{2}\pmod{p^2-1}.
@@ -15,7 +20,7 @@ In these three cases the value sets are, respectively, $\{1,2\}$ and $\{1,p-1\}$
 For $x\in\mathbb{F}_p$, choose $y$ in an algebraic closure with $x=y(1-y)$. The reversed Dickson polynomial satisfies
 
 $$
-\boxed{\,D_n(x,1)=y^n+(1-y)^n\,}
+\boxed{\,D_n(1,x)=y^n+(1-y)^n\,}
 $$
 
 (which is independent of the chosen root since replacing $y$ by $1-y$ leaves the sum unchanged).
@@ -25,7 +30,7 @@ Let $\chi$ denote the quadratic character on $\mathbb{F}_p$, extended by $\chi(0
 **Lemma 1 (Period $p^2-1$).** For all $n\ge0$ and $x\in\mathbb{F}_p$,
 
 $$
-D_{n+p^2-1}(x,1)=D_n(x,1).
+D_{n+p^2-1}(x,1)=D_n(1,x).
 $$
 
 *Proof.* If $y\notin\{0,1\}$ then $y,(1-y)\in\mathbb{F}_{p^2}^\times$ so raising to the $(p^2-1)$-st power is 1; if $y\in\{0,1\}$ the identity is immediate. ∎
@@ -121,7 +126,7 @@ By Lemma 1 it suffices to determine which residues $n\bmod(p^2-1)$ give a two-po
 
 **Step A (restriction to square fiber).**  
 
-If $1-4x$ is a square, we can take $y\in\mathbb{F}_p$. Then $D_n(x,1)=y^n+(1-y)^n$ depends only on $n\bmod (p-1)$. As $y$ runs in $\mathbb{F}_p\setminus\{0,1\}$, the set $\{y^r+(1-y)^r\}$ has more than two values unless $r\in\{0,1\}$. Hence a two-point image forces
+If $1-4x$ is a square, we can take $y\in\mathbb{F}_p$. Then $D_n(1,x)=y^n+(1-y)^n$ depends only on $n\bmod (p-1)$. As $y$ runs in $\mathbb{F}_p\setminus\{0,1\}$, the set $\{y^r+(1-y)^r\}$ has more than two values unless $r\in\{0,1\}$. Hence a two-point image forces
 
 $$
 \boxed{\,n\equiv 0\ \text{or}\ 1\pmod{p-1}.}
@@ -132,7 +137,7 @@ $$
 Write $n=(p-1)k$. On the non-square fiber, with $t=\frac{y}{1-y}\in\mu_{p+1}\setminus\{-1\}$,
 
 $$
-D_n(x,1)=\Big(\frac{1}{1+t}\Big)^n\big(t^n+1\big).
+D_n(1,x)=\Big(\frac{1}{1+t}\Big)^n\big(t^n+1\big).
 $$
 
 The set $\{t^k+t^{-k}:t\in\mu_{p+1}\}$ has size $>2$ unless $k\equiv0$ or $k\equiv\frac{p+1}{2}\pmod{p+1}$. The latter congruence produces at least three values overall; thus the only two-point possibility is $k\equiv0\pmod{p+1}$, i.e.
@@ -148,7 +153,7 @@ which is Case I.
 Write $n=1+k(p-1)$. On the non-square fiber one can use $(1+t)^{p-1}=t^{-1}$ (since $t^p=1/t$) to obtain the exact identity
 
 $$
-\boxed{\,D_n(x,1)= t^{\,1-k}\,\frac{1+t^{\,2k-1}}{1+t},\qquad t\in\mu_{p+1}\setminus\{-1\}.}
+\boxed{\,D_n(1,x)= t^{\,1-k}\,\frac{1+t^{\,2k-1}}{1+t},\qquad t\in\mu_{p+1}\setminus\{-1\}.}
 $$
 
 The map $\phi_m(t)=\frac{1+t^m}{1+t}$ is constant on $\mu_{p+1}\setminus\{-1\}$ iff $m\equiv\pm1\pmod{p+1}$. Thus $D_n$ is constant on the non-square fiber (hence two-valued overall) exactly when
@@ -176,7 +181,7 @@ Combining B1, B2, and Lemma 1 proves the classification.
 **Case 1:** If $n\equiv p^2-1\pmod{p^2-1}$ (e.g. $n=p^2-1$):
 
 $$
-D_n(x,1)=\begin{cases}
+D_n(1,x)=\begin{cases}
 1,& x=0,\\
 2,& x\ne 0
 \end{cases}
@@ -186,7 +191,7 @@ $$
 **Case 2:** If $n\equiv \dfrac{p^2+1}{2}\pmod{p^2-1}$ or $n\equiv \dfrac{p^2+2p-1}{2}\pmod{p^2-1}$:
 
 $$
-D_n(x,1)=\begin{cases}
+D_n(1,x)=\begin{cases}
 1,& 1-4x \text{ square in }\mathbb{F}_p\ (\text{including }0),\\
 p-1,& 1-4x \text{ non-square}
 \end{cases}
@@ -194,5 +199,4 @@ p-1,& 1-4x \text{ non-square}
 $$
 
 *Keywords:* Dickson polynomial, reversed Dickson, finite fields, value set, quadratic character.
-
 

@@ -12,6 +12,14 @@ import matplotlib.colors as mcolors
 import numpy as np
 import math
 import os
+from pathlib import Path
+import sys
+
+SCRIPT_ROOT = Path(__file__).resolve().parents[1]
+if str(SCRIPT_ROOT) not in sys.path:
+    sys.path.append(str(SCRIPT_ROOT))
+
+from utilities.dickson import reversed_dickson
 
 
 def is_prime(num):
@@ -41,7 +49,8 @@ def compute_value_sets(p, a):
     for n in range(2, p * p):
         Dnext = []
         for x in range(p):
-            Dnext_val = (a * Dcurr[x] - x * Dprev[x]) % p
+            # Explicitly using reversed variant D_n(a, x).
+            Dnext_val = reversed_dickson(n=n, a=a, x=x, modulus=p)
             Dnext.append(Dnext_val)
         vals = sorted(set(Dnext))
         results.append((n, len(vals), len(vals) == p, vals))
@@ -168,7 +177,7 @@ def main():
         f.write("Result: For all nonzero a in F_p, the cardinality distribution\n")
         f.write("of value sets {D_n(a, x) : x in F_p} is IDENTICAL.\n\n")
         f.write("Mathematical explanation:\n")
-        f.write("  D_n(x, a) = a^n * D_n(x/a^2, 1)  for a != 0\n")
+        f.write("  D_n(a, x) = a^n * D_n(x/a^2, 1)  for a != 0\n")
         f.write("  Since x -> x/a^2 is a bijection on F_p and\n")
         f.write("  multiplication by a^n is a bijection on F_p,\n")
         f.write("  the value set has the same cardinality.\n\n")
